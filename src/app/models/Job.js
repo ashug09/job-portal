@@ -9,11 +9,12 @@ const jobSchema = new Schema(
     jobLocation: String,
     companyName: String,
     companyAddress: String,
-    experience: Number,
-    salary: Number,
+    experience: String,
+    salary: String,
     jobType: [String],
     skills: [String],
     email: String,
+    companyLogo: String,
   },
   { timestamps: true }
 );

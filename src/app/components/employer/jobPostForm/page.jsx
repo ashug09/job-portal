@@ -11,9 +11,24 @@ import {
 import { useForm } from "@mantine/form";
 import axios from "axios";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function JobPostForm() {
+  const [logo, setLogo] = useState("");
+  useEffect(() => {
+    fetchLogo()
+  }, []);
+  const fetchLogo = async () => {
+    await axios
+      .post("http://localhost:3000/api/employerCheck", { email: email })
+      .then((res) => {
+        const logo = res.data.EmployerProfile[0];
+        setLogo(logo.companyLogo);
+      })
+      .catch((err) => {
+        console.log("err", err);
+      });
+  }
   const router = useRouter();
   const email = useSearchParams().get("email");
   const [loading, setLoading] = useState(false);
@@ -88,7 +103,7 @@ export default function JobPostForm() {
     setLoading(true);
     form.reset();
     axios
-      .post("/api/job", form.values)
+      .post("/api/job", {...form.values, companyLogo: logo})
       .then((res) => {
         console.log(res);
         setLoading(false);
@@ -97,6 +112,7 @@ export default function JobPostForm() {
       .catch((err) => {
         console.log(err);
       });
+    console.log(form.values);
   };
   return (
     <form

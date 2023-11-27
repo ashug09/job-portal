@@ -1,20 +1,17 @@
+const inter = Inter({ subsets: ["latin"] });
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { Suspense } from "react";
-const inter = Inter({ subsets: ["latin"] });
-import "../../firebase"
-// Import styles of packages that you've installed.
-// All packages except `@mantine/hooks` require styles imports
-
+import "../../firebase";
 import "@mantine/core/styles.css";
 import { MantineProvider, ColorSchemeScript } from "@mantine/core";
 import Nav from "./components/nav/page";
 import LoaderAnimation from "./loader";
 
 export const metadata = {
-  title: "My Mantine app",
-  description: "I have followed setup instructions carefully",
+  title: "Job Portal",
+  description: "job portal codsoft assingment",
 };
 
 export default function RootLayout({
@@ -29,10 +26,11 @@ export default function RootLayout({
       </head>
       <body>
         <MantineProvider>
-          <Suspense fallback={<LoaderAnimation/>} />
-          <Nav />
-          {children}
-          </MantineProvider>
+          <Suspense fallback={<LoaderAnimation />}>
+            <Nav />
+            {children}
+          </Suspense>
+        </MantineProvider>
       </body>
     </html>
   );

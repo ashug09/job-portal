@@ -47,16 +47,15 @@ export default function Nav() {
           <MantineLogo size={30} />
 
           <Group h="100%" gap={0} visibleFrom="sm">
-            <a href="#" className={classes.link}>
+            <Link href="/components/job" className={classes.link}>
               Jobs
-            </a>
-            <a
-              onClick={() => router.push("/components/employer")}
-              href="#"
+            </Link>
+            <Link
+              href="/components/employer"
               className={classes.link}
             >
               Employer
-            </a>
+            </Link>
             <a href="#" className={classes.link}>
               Candidate
             </a>
@@ -87,15 +86,18 @@ export default function Nav() {
         <ScrollArea h={`calc(100vh - ${rem(80)})`} mx="-md">
           <Divider my="sm" />
 
-          <a href="#" className={classes.link}>
-            Jobs
-          </a>
           <Link
-            href={{
-              pathname: "/components/employer",
-            }}
+            href="/components/job"
             onClick={() => {
-              // router.push();
+              closeDrawer();
+            }}
+            className={classes.link}
+          >
+            Jobs
+          </Link>
+          <Link
+            href="/components/employer"
+            onClick={() => {
               closeDrawer();
             }}
             className={classes.link}

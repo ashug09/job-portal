@@ -24,7 +24,7 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 
-export default function LogIn(props: PaperProps) {
+export default function LogIn(props: any) {
   const [type, toggle] = useToggle(["login", "register"]);
   const form = useForm({
     initialValues: {

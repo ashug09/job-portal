@@ -33,17 +33,18 @@ export default function JobCard() {
               className={`lg:w-64 min-[120px]:w-full min-[120px]:mx-2 my-2 ${classes.card}`}
               key={job._id}
             >
+              <img className="bg-gray-100 h-32 rounded-lg" src={job.companyLogo} />
               <Card.Section className={classes.section} mt="md">
                 <Group justify="apart">
                   <Text fz="lg" fw={500}>
-                    {job.title}
+                    {job.jobTitle}
                   </Text>
                   <Badge size="sm" variant="light">
-                    {job.company}
+                    {job.companyName}
                   </Badge>
                 </Group>
                 <Text fz="sm" mt="xs">
-                  {job.description?.slice(0, 60)}....
+                  {job.jobDescription?.slice(0, 60)}....
                 </Text>
               </Card.Section>
 
@@ -78,7 +79,7 @@ export default function JobCard() {
                       stroke={1.5}
                     />
                     <Text size="xs" className="capitalize">
-                      {job.location}
+                      {job.jobLocation}
                     </Text>
                   </Center>
                 </Group>

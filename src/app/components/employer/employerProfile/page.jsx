@@ -30,7 +30,6 @@ export default function Page() {
     await axios
       .post("http://localhost:3000/api/employerCheck", { email: email })
       .then((res) => {
-        console.log(res.data.EmployerProfile[0]);
         setProfile(res.data.EmployerProfile);
       })
       .catch((err) => {
@@ -46,6 +45,8 @@ export default function Page() {
       {profile.map((profile) => {
         return (
           <>
+          <div className="lg:flex lg: justify-around">
+
             <div className="text-center bg-gray-100 rounded-lg w-max p-8 mx-auto">
               <img
                 className="bg-gray-100 rounded-full w-44 h-44 mx-auto object-cover"
@@ -56,7 +57,6 @@ export default function Page() {
               <p className="text-gray-500">{profile.companyAddress}</p>
             </div>
             <div className="text-center bg-gray-100 rounded-lg w-max p-8 mx-auto my-8">
-              <img className="bg-gray-100 rounded-full w-44 h-44 mx-auto" />
               <h1 className="text-2xl font-bold">{profile.recruterName}</h1>
               <p className="text-gray-500">{profile.designation}</p>
               <p className="text-gray-500">{profile.contact}</p>
@@ -67,6 +67,7 @@ export default function Page() {
                 Log Out
               </button>
             </div>
+          </div>
           </>
         );
       })}

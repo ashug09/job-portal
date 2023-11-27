@@ -109,12 +109,12 @@ export default function ProfileForm({ email }) {
         fw={900}
         ta="center"
       >
-        Employer's Profile Form
+        Employer&apos;s Profile Form
       </Title>
 
       <TextInput
         label="Company Name"
-        placeholder="Your company's name"
+        placeholder="Your company&apos;s name"
         name="companyName"
         variant="filled"
         {...form.getInputProps("companyName")}
@@ -122,7 +122,7 @@ export default function ProfileForm({ email }) {
       <Textarea
         mt="md"
         label="Company Description"
-        placeholder="Your company's description"
+        placeholder="Your company&apos;s description"
         maxRows={10}
         minRows={5}
         autosize
@@ -133,14 +133,14 @@ export default function ProfileForm({ email }) {
       <SimpleGrid cols={{ base: 1, sm: 2 }} mt="xl">
         <TextInput
           label="Company Address"
-          placeholder="Your company's address"
+          placeholder="Your company&apos;s address"
           name="companyAddress"
           variant="filled"
           {...form.getInputProps("companyAddress")}
         />
         <TextInput
           label="Recruter Name"
-          placeholder="recuter's name"
+          placeholder="recuter&apos;s name"
           name="recruterName"
           variant="filled"
           {...form.getInputProps("recruterName")}
@@ -167,8 +167,8 @@ export default function ProfileForm({ email }) {
 
       <FileInput
         className="my-5 w-max p-2 mx-auto hidden"
-        label="Upload your company's logo"
-        placeholder="Your company's logo"
+        label="Upload your company&apos;s logo"
+        placeholder="Your company&apos;s logo"
         name="companyLogo"
         variant="filled"
         ref={fileRef}
@@ -182,7 +182,7 @@ export default function ProfileForm({ email }) {
         <span className="mr-2">
           <IconCloudUpload />
         </span>{" "}
-        Upload Company's Logo
+        Upload Company&apos;s Logo
       </Button>
       <h4>{form.values.companyLogo?.name}</h4>
       <h6 className="text-red-500 text-sm">{form.errors.companyLogo}</h6>
