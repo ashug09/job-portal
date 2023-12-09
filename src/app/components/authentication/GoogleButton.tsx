@@ -1,7 +1,7 @@
 "use client";
 import { Button, ButtonProps } from "@mantine/core";
 import axios from "axios";
-
+import "../../../../firebase"
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 function GoogleIcon(props: React.ComponentPropsWithoutRef<"svg">) {
   return (

@@ -14,6 +14,8 @@ export default function Page() {
 
   onAuthStateChanged(auth, (user) => {
     setUser(user);
+
+    console.log("user", user);
   });
   return user ? (
     <CheckProfile email={user.email} name={user.displayName} />

@@ -18,6 +18,7 @@ import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import "../../../../../firebase";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { notifications } from "@mantine/notifications";
 export default function ProfileForm({ email }) {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
@@ -77,26 +78,32 @@ export default function ProfileForm({ email }) {
       })
       .then(() => {
         getDownloadURL(ref(storage, "images/" + uniqueFileName)).then((url) => {
-          console.log(url);
           axios
             .post("/api/employer", { ...form.values, companyLogo: url })
             .then((res) => {
               setLoading(false);
-              router.push("/components/employer");
+              notifications.show({
+                title: "Profile Created",
+                message: "Your profile has been created successfully",
+                autoClose: 2000,
+                onClose: () => window.location.reload(),
+              });
             })
             .catch((err) => {
+              alert("something went wrong check console");
               console.log(err);
             });
         });
       })
       .catch((error) => {
+        alert("something went wrong check console");
         console.log(error);
       });
   };
 
   return (
     <form
-      className="mx-5"
+      className="lg:mx-80 mx-5"
       onSubmit={form.onSubmit(() => {
         handleFormSubmit();
       })}
@@ -114,7 +121,7 @@ export default function ProfileForm({ email }) {
 
       <TextInput
         label="Company Name"
-        placeholder="Your company&apos;s name"
+        placeholder="Your company's name"
         name="companyName"
         variant="filled"
         {...form.getInputProps("companyName")}
@@ -122,7 +129,7 @@ export default function ProfileForm({ email }) {
       <Textarea
         mt="md"
         label="Company Description"
-        placeholder="Your company&apos;s description"
+        placeholder="Your company's description"
         maxRows={10}
         minRows={5}
         autosize
@@ -133,14 +140,14 @@ export default function ProfileForm({ email }) {
       <SimpleGrid cols={{ base: 1, sm: 2 }} mt="xl">
         <TextInput
           label="Company Address"
-          placeholder="Your company&apos;s address"
+          placeholder="Your company's address"
           name="companyAddress"
           variant="filled"
           {...form.getInputProps("companyAddress")}
         />
         <TextInput
           label="Recruter Name"
-          placeholder="recuter&apos;s name"
+          placeholder="recuter's name"
           name="recruterName"
           variant="filled"
           {...form.getInputProps("recruterName")}
@@ -167,8 +174,8 @@ export default function ProfileForm({ email }) {
 
       <FileInput
         className="my-5 w-max p-2 mx-auto hidden"
-        label="Upload your company&apos;s logo"
-        placeholder="Your company&apos;s logo"
+        label="Upload your company's logo"
+        placeholder="Your company's logo"
         name="companyLogo"
         variant="filled"
         ref={fileRef}

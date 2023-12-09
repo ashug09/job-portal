@@ -15,6 +15,7 @@ const jobSchema = new Schema(
     skills: [String],
     email: String,
     companyLogo: String,
+    userApplied: [String], //candidate email
   },
   { timestamps: true }
 );

@@ -23,8 +23,11 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "firebase/auth";
-
+import { useState } from "react";
+import { notifications } from "@mantine/notifications";
+import "../../../../firebase"
 export default function LogIn(props: any) {
+  const [loading, setLoading] = useState(false);
   const [type, toggle] = useToggle(["login", "register"]);
   const form = useForm({
     initialValues: {
@@ -45,26 +48,13 @@ export default function LogIn(props: any) {
   });
 
   const handleSubmit = async () => {
-    console.log(form.values);
-    // axios
-    //   .post("http://localhost:3000/api/logIn", {
-    //     email: form.values.email,
-    //     password: form.values.password,
-    //   })
-    //   .then((res) => {
-    //     console.log(res);
-    //     const token = getCookie("token");
-    //     console.log("token: " + token);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
+    setLoading(true);
     const auth = getAuth();
     if (type === "register") {
       createUserWithEmailAndPassword(
         auth,
         form.values.email,
-        form.values.password
+        form.values.password,
       )
         .then((userCredential) => {
           // Signed up
@@ -77,11 +67,12 @@ export default function LogIn(props: any) {
               console.log(res);
             })
             .catch((err) => {
+              alert("Something went wrong check console");
               console.log(err);
             });
-          console.log(user);
         })
         .catch((error) => {
+          alert("Something went wrong check console");
           const errorCode = error.code;
           const errorMessage = error.message;
           console.log(errorCode);
@@ -104,7 +95,7 @@ export default function LogIn(props: any) {
     }
   };
   return (
-    <Paper radius="md" p="xl" withBorder {...props}>
+    <Paper className="lg:mx-96" radius="md" p="xl" withBorder {...props}>
       <Text size="lg" fw={500}>
         Welcome to Job Post, {type} with
       </Text>
@@ -180,7 +171,7 @@ export default function LogIn(props: any) {
               ? "Already have an account? Login"
               : "Don't have an account? Register"}
           </Anchor>
-          <Button type="submit" radius="xl">
+          <Button loading={loading} type="submit" radius="xl">
             {upperFirst(type)}
           </Button>
         </Group>

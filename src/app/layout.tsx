@@ -8,6 +8,9 @@ import "@mantine/core/styles.css";
 import { MantineProvider, ColorSchemeScript } from "@mantine/core";
 import Nav from "./components/nav/page";
 import LoaderAnimation from "./loader";
+import { Notifications } from "@mantine/notifications";
+import "@mantine/notifications/styles.css";
+import '@mantine/carousel/styles.css';
 
 export const metadata = {
   title: "Job Portal",
@@ -28,6 +31,7 @@ export default function RootLayout({
         <MantineProvider>
           <Suspense fallback={<LoaderAnimation />}>
             <Nav />
+            <Notifications position="top-right" zIndex={1000} />
             {children}
           </Suspense>
         </MantineProvider>

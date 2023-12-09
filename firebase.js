@@ -10,7 +10,6 @@ const firebaseConfig = {
   apiKey: "AIzaSyCvb5UaSTAHxPrp3ydKfb-y4zzZ19TeAiM",
   authDomain: "job-portal-d6dba.firebaseapp.com",
   projectId: "job-portal-d6dba",
-  // storageBucket: "job-portal-d6dba.appspot.com",
   messagingSenderId: "548585385155",
   appId: "1:548585385155:web:1b5fe50d2c95254ed0c676",
   storageBucket: 'gs://job-portal-d6dba.appspot.com'

@@ -32,6 +32,7 @@ import {
 import classes from "./nav.module.css";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { getAuth } from "firebase/auth";
 
 export default function Nav() {
   const router = useRouter();
@@ -39,31 +40,33 @@ export default function Nav() {
     useDisclosure(false);
   const [linksOpened, { toggle: toggleLinks }] = useDisclosure(false);
   const theme = useMantineTheme();
-
+// const auth = getAuth();
   return (
     <Box pb={25}>
       <header className={classes.header}>
         <Group justify="space-between" h="100%">
-          <MantineLogo size={30} />
-
+          <Link href="/">
+            <MantineLogo size={30} />
+          </Link>
           <Group h="100%" gap={0} visibleFrom="sm">
             <Link href="/components/job" className={classes.link}>
               Jobs
             </Link>
-            <Link
-              href="/components/employer"
-              className={classes.link}
-            >
+            <Link href="/components/employer" className={classes.link}>
               Employer
             </Link>
-            <a href="#" className={classes.link}>
+            <Link href="/components/candidate" className={classes.link}>
               Candidate
-            </a>
+            </Link>
           </Group>
 
           <Group visibleFrom="sm">
-            <Button variant="default">Log in</Button>
-            <Button>Sign up</Button>
+            <Link href="/components/authentication">
+              <Button variant="default">Log in</Button>
+            </Link>
+            <Link href="/components/authentication">
+              <Button>Sign up</Button>
+            </Link>
           </Group>
 
           <Burger
@@ -104,15 +107,25 @@ export default function Nav() {
           >
             Employer
           </Link>
-          <a href="#" className={classes.link}>
+          <Link
+            href="/components/candidate"
+            onClick={() => {
+              closeDrawer();
+            }}
+            className={classes.link}
+          >
             Candidate
-          </a>
+          </Link>
 
           <Divider my="sm" />
 
           <Group justify="center" grow pb="xl" px="md">
-            <Button variant="default">Log in</Button>
-            <Button>Sign up</Button>
+            <Link href="/components/authentication">
+              <Button variant="default">Log in</Button>
+            </Link>
+            <Link href="/components/authentication">
+              <Button>Sign up</Button>
+            </Link>
           </Group>
         </ScrollArea>
       </Drawer>

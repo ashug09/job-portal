@@ -10,6 +10,7 @@ const employerSchema = new Schema({
   contact: Number,
   companyLogo: String,
   email: String,
+  candidatesApplied: [String],
 });
 
 const Employer =

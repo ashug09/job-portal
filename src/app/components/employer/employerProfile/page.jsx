@@ -4,7 +4,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import React, { useEffect } from "react";
 import ButtonGroup from "../buttonGroup";
 import { getAuth, signOut } from "firebase/auth";
-
+import "../../../../../firebase"
 export default function Page() {
   const router = useRouter();
   const email = useSearchParams().get("email");

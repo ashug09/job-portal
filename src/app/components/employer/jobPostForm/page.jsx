@@ -9,14 +9,16 @@ import {
   MultiSelect,
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
+import { notifications } from "@mantine/notifications";
 import axios from "axios";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import "../../../../../firebase"
 
 export default function JobPostForm() {
   const [logo, setLogo] = useState("");
   useEffect(() => {
-    fetchLogo()
+    fetchLogo();
   }, []);
   const fetchLogo = async () => {
     await axios
@@ -28,10 +30,11 @@ export default function JobPostForm() {
       .catch((err) => {
         console.log("err", err);
       });
-  }
+  };
   const router = useRouter();
   const email = useSearchParams().get("email");
   const [loading, setLoading] = useState(false);
+  
   const form = useForm({
     initialValues: {
       jobTitle: "",
@@ -99,24 +102,61 @@ export default function JobPostForm() {
     "Continuous learning and adaptability",
   ];
 
-  const handleFormSubmit = () => {
+  const fetchCandidate = async () => {
+    const candidatesArray = [];
+    await axios
+      .get("/api/candidate")
+      .then((res) => {
+        console.log(res);
+        res.data.candidates.map((candidate) => {
+          candidatesArray.push(candidate.email);
+        });
+      })
+      .then(() => {
+        axios
+          .post("/api/send/new-job-posting", {
+            emails: candidatesArray,
+            companyName: form.values.companyName,
+          })
+          .then((res) => {
+            console.log("email res: ");
+            console.log(res);
+          })
+          .catch((err) => {
+            alert("Something went wrong in mailing candidates check console");
+            console.log("err", err);
+          });
+      })
+      .catch((err) => {
+        alert("Something went wrong in mailing candidates check console");
+        console.log("err", err);
+      });
+  };
+
+  const handleFormSubmit = async () => {
+    await fetchCandidate();
     setLoading(true);
     form.reset();
     axios
-      .post("/api/job", {...form.values, companyLogo: logo})
+      .post("/api/job", { ...form.values, companyLogo: logo })
       .then((res) => {
-        console.log(res);
+        notifications.show({
+          title: "Job Created",
+          message: "Your job posted successfully",
+          autoClose: 2000,
+        });
         setLoading(false);
         router.push("/components/employer");
       })
       .catch((err) => {
+        alert("Something went wrong check console");
         console.log(err);
       });
-    console.log(form.values);
   };
+
   return (
     <form
-      className="mx-5"
+      className="lg:mx-80 mx-5"
       onSubmit={form.onSubmit(() => {
         handleFormSubmit();
       })}

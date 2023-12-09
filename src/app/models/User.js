@@ -9,7 +9,7 @@ const userSchema = new Schema({
       unique: true,
     },
   },
-  password: String,
+  // password: String,
   // role: String,
   // profilePic: String,
   // contact: Number,
