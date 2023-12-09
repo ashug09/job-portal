@@ -10,7 +10,6 @@ import Nav from "./components/nav/page";
 import LoaderAnimation from "./loader";
 import { Notifications } from "@mantine/notifications";
 import "@mantine/notifications/styles.css";
-import '@mantine/carousel/styles.css';
 
 export const metadata = {
   title: "Job Portal",
